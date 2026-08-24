@@ -85,8 +85,6 @@ src/
     fx.ts                           combat animation timing + impact bursts
   audio/
     audio.ts         WebAudio-generated SFX + ambient music (no sample files)
-  dev/
-    devtools.ts      dev-only debug panels, fully stripped from the built game
   html/
     index.html      unminified template, inlined into the build output
 tools/

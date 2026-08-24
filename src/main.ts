@@ -26,7 +26,6 @@ import { GOLD_TEXT, TEXT_COLOR, PANEL_BORDER } from './render/shared';
 import { generateFloorEncounter, resolveTrap, resolveTreasure, type FloorEncounter, RoomType } from './game/dungeon';
 import { createProgression, grantXp, xpForMonster, type Progression } from './game/progression';
 import { rollMutationItem, CONSUMABLE_DROP_CHANCE, TREASURE_MUTATION_CHANCE } from './game/item';
-import { handleDevKeydown, drawDevTools } from './dev/devtools';
 import { mulberry32, chance } from './game/rng';
 import { animOffset, animProgress } from './render/fx';
 import {
@@ -524,9 +523,6 @@ function confirmSelection(): void {
 }
 
 window.addEventListener('keydown', (e) => {
-  if (__DEV__ && handleDevKeydown(e, { isTitle: state === GameState.Title, traits, player, grantPotion: () => (inventory += 1) })) {
-    return;
-  }
   if (e.key === 'm' || e.key === 'M') {
     toggleMute();
     return;
@@ -900,14 +896,12 @@ function render(): void {
       drawMenu(context, titleMenu[0], titleMenu[1], titleMenu[2], titleMenu[3], currentMenuOptions(), selected, true);
       drawFadeOverlay(t);
       drawBestiary(t);
-      if (__DEV__) drawDevTools(context, 1280);
       return;
     }
 
     if (state === GameState.Win) {
       drawWin(t);
       drawFadeOverlay(t);
-      if (__DEV__) drawDevTools(context, 1280);
       return;
     }
 
@@ -1084,7 +1078,6 @@ function render(): void {
     }
     drawFadeOverlay(t);
     drawBestiary(t);
-    if (__DEV__) drawDevTools(context, 1280);
 }
 
 function loop(): void {
